@@ -1,15 +1,23 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
+import { Link } from 'react-router-dom';
+
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
+  const { pathname } = useLocation();
+  if (pathname === '/') return null;
+
   const onLogout = e => {
     e.preventDefault();
     dispatch(logout());
     navigate('/login');
   };
+
   return (
     <nav>
       <span>header</span>

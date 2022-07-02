@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, reset } from '../../features/auth/authSlice';
 import { notification } from 'antd';
+import './Register.scss';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -47,23 +48,25 @@ const Register = () => {
     }
   };
   return (
-    <form onSubmit={onSubmit}>
-      <input type='text' name='name' value={name} onChange={onChange} />
-      <input type='email' name='email' value={email} onChange={onChange} />
-      <input
-        type='password'
-        name='password'
-        value={password}
-        onChange={onChange}
-      />
-      <input
-        type='password'
-        name='password2'
-        value={password2}
-        onChange={onChange}
-      />
-      <button type='submit'>Register</button>
-    </form>
+    <div className='register-container'>
+      <form onSubmit={onSubmit}>
+        <input type='text' name='name' value={name} onChange={onChange} />
+        <input type='email' name='email' value={email} onChange={onChange} />
+        <input
+          type='password'
+          name='password'
+          value={password}
+          onChange={onChange}
+        />
+        <input
+          type='password'
+          name='password2'
+          value={password2}
+          onChange={onChange}
+        />
+        <button type='submit'>Register</button>
+      </form>
+    </div>
   );
 };
 
