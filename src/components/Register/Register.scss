@@ -3,6 +3,27 @@
   margin: 0;
   box-sizing: border-box;
 }
-body {
-  background-color: lightblue;
+.register-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+}
+.register-box {
+  width: 50%;
+  max-width: 800px;
+  padding: 3rem;
+  background-color: red;
+  border-radius: 10px;
+  h2 {
+    font-family: 'Pacifico';
+    font-size: 2rem;
+    font-weight: bold;
+    opacity: 0.5;
+    text-shadow: 4px 4px 7px red;
+    letter-spacing: 0.1em;
+    font-style: italic;
+  }
 }

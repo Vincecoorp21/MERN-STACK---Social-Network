@@ -49,23 +49,48 @@ const Register = () => {
   };
   return (
     <div className='register-container'>
-      <form onSubmit={onSubmit}>
-        <input type='text' name='name' value={name} onChange={onChange} />
-        <input type='email' name='email' value={email} onChange={onChange} />
-        <input
-          type='password'
-          name='password'
-          value={password}
-          onChange={onChange}
-        />
-        <input
-          type='password'
-          name='password2'
-          value={password2}
-          onChange={onChange}
-        />
-        <button type='submit'>Register</button>
-      </form>
+      <div className='register-box'>
+        <h2>bSocial</h2>
+        <form onSubmit={onSubmit} className='form-login-container'>
+          <label>Name</label>
+          <input
+            type='text'
+            name='name'
+            value={name}
+            onChange={onChange}
+            className='input-field'
+            placeholder='Enter your name'
+          />
+          <label>Email Address </label>
+          <input
+            type='email'
+            name='email'
+            value={email}
+            onChange={onChange}
+            className='input-field'
+            placeholder='Enter your email'
+          />
+          <label>Set Password</label>
+          <input
+            type='password'
+            name='password'
+            value={password}
+            onChange={onChange}
+            className='input-field'
+            placeholder='Enter your password'
+          />
+          <label>Set Password Again</label>
+          <input
+            type='password'
+            name='password2'
+            value={password2}
+            onChange={onChange}
+            className='input-field'
+            placeholder='Confirm password'
+          />
+          <button type='submit'>Register</button>
+        </form>
+      </div>
     </div>
   );
 };
