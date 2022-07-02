@@ -11,7 +11,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const { pathname } = useLocation();
-  if (pathname === '/' || pathname === '/login') return null;
+  if (pathname === '/' || pathname === '/login' || pathname === '/register')
+    return null;
 
   const onLogout = () => {
     // e.preventDefault();

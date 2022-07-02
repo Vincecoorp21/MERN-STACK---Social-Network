@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register, reset } from '../../features/auth/authSlice';
 import { notification } from 'antd';
 import './Register.scss';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -89,6 +90,9 @@ const Register = () => {
             placeholder='Confirm password'
           />
           <button type='submit'>Register</button>
+          <span>
+            Have an account?<Link to='/login'> Go to Login</Link>
+          </span>
         </form>
       </div>
     </div>
