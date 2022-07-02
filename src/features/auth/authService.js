@@ -20,10 +20,12 @@ const logout = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
   const res = await axios.delete(API_URL + '/users/logout', {
     headers: {
-      autorization: user?.token,
+      authorization: user?.token,
     },
   });
+  // console.log('primero', res.data);
   if (res.data) {
+    // console.log('segundo', res.data);
     localStorage.removeItem('user');
   }
   return res.data;

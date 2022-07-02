@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
 import { Link } from 'react-router-dom';
+import { notification } from 'antd';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,10 +13,13 @@ const Header = () => {
   const { pathname } = useLocation();
   if (pathname === '/' || pathname === '/login') return null;
 
-  const onLogout = e => {
-    e.preventDefault();
+  const onLogout = () => {
+    // e.preventDefault();
     dispatch(logout());
-    navigate('/login');
+    notification.success({ message: 'Te has desconectado con éxito' });
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   };
 
   return (
