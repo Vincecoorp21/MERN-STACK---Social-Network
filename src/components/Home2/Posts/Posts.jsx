@@ -1,13 +1,24 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getAllWith } from '../../../features/posts/postsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllWith, reset } from '../../../features/posts/postsSlice';
 import Post from './Post/Post';
 
 const Posts = () => {
   const dispatch = useDispatch();
+  const { isLoading } = useSelector(state => state.posts);
+
+  const getPostsAndReset = async () => {
+    await dispatch(getAllWith());
+    dispatch(reset());
+  };
+
   useEffect(() => {
-    dispatch(getAllWith());
+    getPostsAndReset();
   }, []);
+
+  if (isLoading) {
+    return <h1>Cargando posts...</h1>;
+  }
   return (
     <div>
       <h1>Posts</h1>
