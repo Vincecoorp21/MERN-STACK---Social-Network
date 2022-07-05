@@ -3,21 +3,28 @@ import { useEffect } from 'react';
 import './Profile.scss';
 // import { getUserInfo } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+import { deletePost } from '../../features/posts/postsSlice';
 
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
   // const { posts } = useSelector(state => state.posts);
   const dispatch = useDispatch();
-  console.log('hola', user);
+  // console.log('hola', user);
 
   const listapost = user.user.postId;
 
   // console.log('soy una list', listapost);
 
   useEffect(() => {
-    console.log('1');
+    // console.log('1');
     // dispatch(getUserInfo());
   }, []);
+
+  // <button onClick={() => dispatch(deletePost(post._id))}></button>
+
+  const deletePostNow = _id => {
+    dispatch(deletePost(_id));
+  };
 
   const userPost = listapost?.map(userPost => {
     // console.log('2', userPost);
@@ -25,7 +32,10 @@ const Profile = () => {
       <div key={userPost._id}>
         <span>{userPost.title}</span>
         <span>
-          <button>Hola</button>
+          <button onClick={() => deletePostNow(userPost._id)}>Eliminar</button>
+        </span>
+        <span>
+          <button>Editar</button>
         </span>
       </div>
     );

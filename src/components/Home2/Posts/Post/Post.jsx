@@ -47,7 +47,7 @@ const Post = () => {
   // console.log('like', like);
 
   const post = posts.map(post => {
-    // console.log('dentro del map', post);
+    console.log('dentro del map', post);
     return (
       <div key={post._id} className='wrap'>
         <div className='feed-center'>
