@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPost } from '../../../../features/posts/postsSlice';
+import { LikeOutlined } from '@ant-design/icons';
+import './Post.scss';
 
 const Post = () => {
   const [formData, setFormData] = useState({
@@ -33,19 +35,27 @@ const Post = () => {
   };
 
   const post = posts.map(post => {
-    console.log('post y user', post);
-    console.log('img', post.userId?.avatar);
+    // console.log('post y user', post);
+    // console.log('img', post.userId?.avatar);
     return (
-      <div key={post._id}>
-        <Link to={'/post/' + post._id}>
-          <h2>Título Post:{post.title}</h2>
-          {/* <p>Creado el {post.updateAt}</p> */}
-          {/* <h3>User:{post.userId.name}</h3> */}
-        </Link>
-        <p>{post.userId?.name}</p>
-        <span>
-          <img src={API_URL + post.userId?.avatar} alt='' />
-        </span>
+      <div key={post._id} className='wrap'>
+        <div className='feed-center'>
+          <Link to={'/post/' + post._id}>
+            <h2>Título Post:{post.title}</h2>
+            {/* <p>Creado el {post.updateAt}</p> */}
+            {/* <h3>User:{post.userId.name}</h3> */}
+          </Link>
+          <p>{post.userId?.name}</p>
+          <span>
+            <LikeOutlined />
+          </span>
+          <span>
+            {/* <img src={API_URL + post.userId?.avatar} alt='' /> */}
+          </span>
+          <br />
+          <br />
+          <hr />
+        </div>
       </div>
     );
   });
