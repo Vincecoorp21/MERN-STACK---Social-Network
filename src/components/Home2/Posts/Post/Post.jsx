@@ -47,6 +47,7 @@ const Post = () => {
   const post = posts.map(post => {
     // console.log('dentro del map', post);
     const isAlreadyLiked = post.likes?.includes(user?.user._id);
+    console.log('soy yo', post);
     return (
       <section key={post._id} className='wrapper'>
         <div className='main-card'>
