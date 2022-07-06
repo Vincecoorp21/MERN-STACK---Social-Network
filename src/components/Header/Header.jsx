@@ -35,9 +35,9 @@ const Header = () => {
               </Link>
             </span>
             <span>
-              <Link to='/profile'>{user.user.name}</Link>{' '}
+              <Link to='/profile'>{user.name}</Link>{' '}
             </span>
-            {user.user.role === 'admin' ? (
+            {user.role === 'admin' ? (
               <span>
                 <Link to='/admin'>Admin</Link>
               </span>

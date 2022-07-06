@@ -1,38 +1,37 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import './Profile.scss';
-// import { getUserInfo } from '../../features/auth/authSlice';
+import { getUserInfo } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../features/posts/postsSlice';
 
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
   // const { posts } = useSelector(state => state.posts);
+
+  console.log('Componente Profile', user);
   const dispatch = useDispatch();
-  // console.log('hola', user);
 
-  const listapost = user.user.postId;
-
-  // console.log('soy una list', listapost);
+  // const listapost = user.user?.postId;
 
   useEffect(() => {
     // console.log('1');
-    // dispatch(getUserInfo());
+    dispatch(getUserInfo());
   }, []);
 
   // <button onClick={() => dispatch(deletePost(post._id))}></button>
 
-  const deletePostNow = _id => {
+  const deletePostNew = _id => {
     dispatch(deletePost(_id));
   };
 
-  const userPost = listapost?.map(userPost => {
+  const userPost = user.postId?.map(userPost => {
     // console.log('2', userPost);
     return (
       <div key={userPost._id}>
         <span>{userPost.title}</span>
         <span>
-          <button onClick={() => deletePostNow(userPost._id)}>Eliminar</button>
+          <button onClick={() => deletePostNew(userPost._id)}>Eliminar</button>
         </span>
         <span>
           <button>Editar</button>
@@ -47,19 +46,19 @@ const Profile = () => {
         <div className='profile-card-header'>
           <div className='profile-image'></div>
           <div className='profile-info'>
-            <h3 className='profile-name'>{user.user.name}</h3>
-            <p className='profile-desc'>{user.user.email}</p>
-            <p className='profile-desc'>{user.user.role}</p>
+            <h3 className='profile-name'>{user?.name}</h3>
+            <p className='profile-desc'>{user?.email}</p>
+            <p className='profile-desc'>{user?.role}</p>
           </div>
         </div>
         <div className='profile-card-body'>
           <section class='parte-final'>
             <div class='lista1'>
-              <h3>{user.user.followers.length}K</h3>
+              <h3>{user?.followers?.length}K</h3>
               <h4>Followers</h4>
             </div>
             <div class='lista2'>
-              <h3>{user.user.following.length}K</h3>
+              <h3>{user?.following?.length}K</h3>
               <h4>Following</h4>
             </div>
             <div class='lista3'>
