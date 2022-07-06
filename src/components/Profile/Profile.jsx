@@ -1,28 +1,66 @@
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Profile.scss';
 import { getUserInfo } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../features/posts/postsSlice';
+import {
+  deletePost,
+  getById,
+  updatePost,
+} from '../../features/posts/postsSlice';
+import { Modal } from 'antd';
 
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
-  // const { posts } = useSelector(state => state.posts);
+  const { posts } = useSelector(state => state.posts);
+  const [formData, setFormData] = useState({
+    // title: post.title,
+    // body: post.body,
+    // _id,
+  });
 
-  console.log('Componente Profile', user);
+  // console.log('Componente Profile', user);
   const dispatch = useDispatch();
+
+  const { title, body } = FormData;
 
   // const listapost = user.user?.postId;
 
   useEffect(() => {
     // console.log('1');
     dispatch(getUserInfo());
-  }, []);
-
-  // <button onClick={() => dispatch(deletePost(post._id))}></button>
+    // setFormData({ ...posts });
+  }, [posts]);
 
   const deletePostNew = _id => {
     dispatch(deletePost(_id));
+  };
+
+  //MODAL IS COMING
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = _id => {
+    setIsModalVisible(true);
+    dispatch(getById(_id));
+    console.log('soy id', _id);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+    dispatch(updatePost(formData));
+    setFormData({ title: '', body: '' });
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const onChange = e => {
+    setFormData(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const userPost = user.postId?.map(userPost => {
@@ -34,7 +72,34 @@ const Profile = () => {
           <button onClick={() => deletePostNew(userPost._id)}>Eliminar</button>
         </span>
         <span>
-          <button>Editar</button>
+          <button onClick={() => showModal(userPost._id)}>Edita</button>
+          <Modal
+            title='Basic Modal'
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+          >
+            <label>Edit Post Title</label>
+
+            <input
+              type='text'
+              placeholder='Edit Post Title'
+              value={title}
+              name='title'
+              onChange={onChange}
+            />
+            <br />
+            <label>Edit Post Body</label>
+
+            <input
+              type='text'
+              placeholder='Edit Post Body'
+              value={body}
+              name='body'
+              onChange={onChange}
+            />
+            <br />
+          </Modal>
         </span>
       </div>
     );
@@ -52,16 +117,16 @@ const Profile = () => {
           </div>
         </div>
         <div className='profile-card-body'>
-          <section class='parte-final'>
-            <div class='lista1'>
+          <section className='parte-final'>
+            <div className='lista1'>
               <h3>{user?.followers?.length}K</h3>
               <h4>Followers</h4>
             </div>
-            <div class='lista2'>
+            <div className='lista2'>
               <h3>{user?.following?.length}K</h3>
               <h4>Following</h4>
             </div>
-            <div class='lista3'>
+            <div className='lista3'>
               <h3>1.4K</h3>
               <h4>People</h4>
             </div>

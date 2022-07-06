@@ -83,7 +83,7 @@ export const authSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
-        console.log('action', action.payload);
+        // console.log('action', action.payload);
         state.user = action.payload; //poner
       });
   },

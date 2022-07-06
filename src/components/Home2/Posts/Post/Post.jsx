@@ -6,7 +6,7 @@ import {
   like,
   dislike,
 } from '../../../../features/posts/postsSlice';
-import { LikeOutlined, HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import './Post.scss';
 import logo from '../../../../assets/login-pic-wallpaper.jpg';
 
@@ -24,8 +24,10 @@ const Post = () => {
   const dispatch = useDispatch();
 
   const { posts } = useSelector(state => state.posts);
-  // console.log('fuera dle map', posts);
+
   const { user } = useSelector(state => state.auth);
+
+  console.log('estoy saliendo en el feed', user);
 
   const onChange = e => {
     setFormData(prevState => ({
@@ -41,50 +43,19 @@ const Post = () => {
     e.target.body.value = '';
   };
 
-  // const [like, setlike] = useState(posts.like);
-
-  // const [isLiked, setIsLiked] = useState(false);
-
-  // const likeHandler = () => {
-  //   setlike(isLiked ? like - 1 : like + 1);
-  //   setIsLiked(!isLiked);
-  // };
-  // console.log('like', like);
-
+  // console.log('hola soy nuevo', user);
   const post = posts.map(post => {
-    console.log('dentro del map', post);
+    // console.log('dentro del map', post);
     const isAlreadyLiked = post.likes?.includes(user?.user._id);
     return (
-      // <div key={post._id} className='wrap'>
-      //   <div className='feed-center'>
-      //     <Link to={'/post/' + post._id}>
-      //       <h2>Título Post:{post.title}</h2>
-      //     </Link>
-      //     <p>{post.userId?.name}</p>
-      //     <div>
-      //       <span>
-      //         <LikeOutlined />
-      //         <HeartFilled />
-      //         <HeartOutlined />
-      //       </span>
-      //       <span>{post.likes.length} people like it</span>
-      //     </div>
-      //     <span>
-      //       {/* <img src={API_URL + post.userId?.avatar} alt='' /> */}
-      //     </span>
-      //     <br />
-      //     <br />
-      //     <hr />
-      //   </div>
-      // </div>
       <section key={post._id} className='wrapper'>
         <div className='main-card'>
           <div className='card panel'>
             <div className='card-header'>
               <div className='card-header-left'>
-                <a href='https://www.instagram.com/vincetrend/' target='_blank'>
+                <Link to={'/profile'}>
                   <img src={logo} alt='' className='picture-title' />
-                </a>
+                </Link>
                 <span className='card-title user'>{post.userId?.name}</span>
               </div>
               <div className='dropdown'>
@@ -139,7 +110,7 @@ const Post = () => {
                     ></polygon>
                   </svg>
                 </div>
-                <div class='bottom-icon-left'>
+                <div className='bottom-icon-left'>
                   <svg
                     aria-label='Guardar'
                     className='_8-yf5 '

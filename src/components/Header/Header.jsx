@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
 import { Link } from 'react-router-dom';
 import { notification } from 'antd';
+import { LogoutOutlined, HomeOutlined } from '@ant-design/icons';
+import './Header.scss';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,21 +24,19 @@ const Header = () => {
       navigate('/');
     }, 2000);
   };
-
+  console.log('header', user);
   return (
-    <nav>
+    <nav className='header-nav'>
       <span>header</span>
+
       <div>
+        <span>
+          <Link to='/home2'>
+            <HomeOutlined />
+          </Link>
+        </span>
         {user ? (
           <>
-            <span>
-              <Link to='/' onClick={onLogout}>
-                Logout
-              </Link>
-            </span>
-            <span>
-              <Link to='/profile'>{user.name}</Link>{' '}
-            </span>
             {user.role === 'admin' ? (
               <span>
                 <Link to='/admin'>Admin</Link>
@@ -44,6 +44,14 @@ const Header = () => {
             ) : (
               ''
             )}
+            <span>
+              <Link to='/profile'>{user?.user.name.slice(0, 1)}</Link>{' '}
+            </span>
+            <span>
+              <Link to='/' onClick={onLogout}>
+                <LogoutOutlined />
+              </Link>
+            </span>
           </>
         ) : (
           <>
