@@ -27,7 +27,7 @@ const Post = () => {
 
   const { user } = useSelector(state => state.auth);
 
-  console.log('estoy saliendo en el feed', user);
+  console.log('home user state', user);
 
   const onChange = e => {
     setFormData(prevState => ({
@@ -46,7 +46,7 @@ const Post = () => {
   // console.log('hola soy nuevo', user);
   const post = posts.map(post => {
     // console.log('dentro del map', post);
-    const isAlreadyLiked = post.likes?.includes(user?.user._id);
+    const isAlreadyLiked = post.likes?.includes(user?._id);
     console.log('soy yo', post);
     return (
       <section key={post._id} className='wrapper'>

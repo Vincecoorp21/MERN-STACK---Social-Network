@@ -13,22 +13,25 @@ import { Modal } from 'antd';
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
   const { posts } = useSelector(state => state.posts);
-  const [formData, setFormData] = useState({
-    // title: post.title,
-    // body: post.body,
-    // _id,
-  });
+  // const [formData, setFormData] = useState({
+  //   // title: post.title,
+  //   // body: post.body,
+  //   // _id,
+  // });
 
   // console.log('Componente Profile', user);
   const dispatch = useDispatch();
 
-  const { title, body } = FormData;
+  // const { title, body } = FormData;
 
   // const listapost = user.user?.postId;
 
   useEffect(() => {
     // console.log('1');
+    console.log('state user profile 1', user);
+
     dispatch(getUserInfo());
+    console.log('state user profile 2', user);
     // setFormData({ ...posts });
   }, [posts]);
 
@@ -46,32 +49,32 @@ const Profile = () => {
     console.log('soy id', _id);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-    dispatch(updatePost(formData));
-    setFormData({ title: '', body: '' });
-  };
+  // const handleOk = () => {
+  //   setIsModalVisible(false);
+  //   dispatch(updatePost(formData));
+  //   setFormData({ title: '', body: '' });
+  // };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  // const handleCancel = () => {
+  //   setIsModalVisible(false);
+  // };
 
-  const onChange = e => {
-    setFormData(prevState => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  // const onChange = e => {
+  //   setFormData(prevState => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
 
   const userPost = user.postId?.map(userPost => {
-    // console.log('2', userPost);
+    console.log('Esto es en Post', userPost);
     return (
       <div key={userPost._id}>
         <span>{userPost.title}</span>
         <span>
           <button onClick={() => deletePostNew(userPost._id)}>Eliminar</button>
         </span>
-        <span>
+        {/* <span>
           <button onClick={() => showModal(userPost._id)}>Edita</button>
           <Modal
             title='Basic Modal'
@@ -100,7 +103,7 @@ const Profile = () => {
             />
             <br />
           </Modal>
-        </span>
+        </span> */}
       </div>
     );
   });

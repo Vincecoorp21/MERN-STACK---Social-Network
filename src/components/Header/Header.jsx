@@ -24,7 +24,6 @@ const Header = () => {
       navigate('/');
     }, 2000);
   };
-  console.log('header', user);
   return (
     <nav className='header-nav'>
       <span>header</span>
@@ -37,6 +36,19 @@ const Header = () => {
         </span>
         {user ? (
           <>
+            {/* {user.role === 'admin' ? ( */}
+            {/* <> */}
+            {/* <span>
+              <Link to='/admin'>Admin</Link>
+            </span> */}
+            <span>
+              <Link to='/profile'>{user.name}</Link>{' '}
+            </span>
+            {/* </> */}
+            {/* ) : ( '' )} */}
+            {/* <span>
+              <Link to='/profile'>{user.name}</Link>{' '}
+            </span> */}
             {user.role === 'admin' ? (
               <span>
                 <Link to='/admin'>Admin</Link>
@@ -44,9 +56,6 @@ const Header = () => {
             ) : (
               ''
             )}
-            <span>
-              <Link to='/profile'>{user?.user.name.slice(0, 1)}</Link>{' '}
-            </span>
             <span>
               <Link to='/' onClick={onLogout}>
                 <LogoutOutlined />
