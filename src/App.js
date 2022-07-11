@@ -10,6 +10,7 @@ import Profile from './components/Profile/Profile';
 import 'antd/dist/antd.css';
 import PostDetail from './components/PostDetail/PostDetail';
 import Admin from './components/Admin/Admin';
+import Search from './components/Search/Search';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/home2' element={<Home2 />} />
           <Route path='/post/:_id' element={<PostDetail />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/search/:postName' element={<Search />} />
         </Routes>
       </BrowserRouter>
     </div>

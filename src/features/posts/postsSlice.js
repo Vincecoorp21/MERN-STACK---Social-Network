@@ -72,6 +72,17 @@ export const updatePost = createAsyncThunk(
   }
 );
 
+export const getPostByName = createAsyncThunk(
+  'posts/getPostByName',
+  async postName => {
+    try {
+      return await postsService.getPostByName(postName);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const postsSlice = createSlice({
   name: 'posts',
   initialState,
@@ -118,13 +129,19 @@ export const postsSlice = createSlice({
       state.posts = posts;
     });
     builder.addCase(updatePost.fulfilled, (state, action) => {
-      const posts = state.posts.map(el => {
+      console.log('marcador editpOst', action.payload);
+      const posts = state.posts.posts?.map(el => {
+        console.log('mira aquí 1', el);
         if (el._id === action.payload.post._id) {
           el = action.payload.post;
         }
-        return el;
+        console.log('mira aquí 2', el);
+        return posts;
       });
       state.posts = posts;
+    });
+    builder.addCase(getPostByName.fulfilled, (state, action) => {
+      state.posts = action.payload;
     });
   },
 });

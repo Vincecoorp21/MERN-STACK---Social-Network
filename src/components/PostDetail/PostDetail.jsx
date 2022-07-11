@@ -7,7 +7,7 @@ const PostDetail = () => {
   const { _id } = useParams();
   const dispatch = useDispatch();
   const { post } = useSelector(state => state.posts);
-  // console.log(post);
+  console.log('mira aqui', post);
 
   const commentBody = post.commentId?.map(comment => {
     return <p key={comment._id}>{comment.body}</p>;
@@ -20,9 +20,9 @@ const PostDetail = () => {
   return (
     <>
       <h1>Post detail</h1>
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
-      <p>{commentBody}</p>
+      <h2>Title: {post.title}</h2>
+      <p>Body: {post.body}</p>
+      <p>Coments:{commentBody}</p>
     </>
   );
 };

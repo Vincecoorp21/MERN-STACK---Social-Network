@@ -12,28 +12,44 @@ import { Modal } from 'antd';
 
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
-  const { posts } = useSelector(state => state.posts);
-  // const [formData, setFormData] = useState({
-  //   // title: post.title,
-  //   // body: post.body,
-  //   // _id,
-  // });
-
-  // console.log('Componente Profile', user);
+  const { post, posts } = useSelector(state => state.posts);
   const dispatch = useDispatch();
 
-  // const { title, body } = FormData;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const [formData, setFormData] = useState({
+    title: '',
+    body: '',
+  });
+
+  // console.log('Componente Profile', user);
+
+  const { title, body } = FormData;
 
   // const listapost = user.user?.postId;
 
   useEffect(() => {
     // console.log('1');
-    console.log('state user profile 1', user);
-
+    // console.log('state user profile 1', user);
     dispatch(getUserInfo());
-    console.log('state user profile 2', user);
-    // setFormData({ ...posts });
+    // console.log('state user profile 2', user);
+  }, []);
+
+  //cuando haces un cambio de posts me actualizas el estado de user
+  useEffect(() => {
+    // console.log('1');
+    // console.log('state user profile 1', user);
+    dispatch(getUserInfo());
+    // console.log('state user profile 2', user);
   }, [posts]);
+
+  // useEffect(() => {
+  //   // console.log('1');
+  //   // console.log('state user profile 1', user);
+
+  //   // console.log('state user profile 2', user);
+  //   setFormData({ ...posts });
+  // }, [posts]);
 
   const deletePostNew = _id => {
     dispatch(deletePost(_id));
@@ -41,69 +57,63 @@ const Profile = () => {
 
   //MODAL IS COMING
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   const showModal = _id => {
     setIsModalVisible(true);
     dispatch(getById(_id));
-    console.log('soy id', _id);
+    // console.log('soy id fffff', _id);
   };
 
-  // const handleOk = () => {
-  //   setIsModalVisible(false);
-  //   dispatch(updatePost(formData));
-  //   setFormData({ title: '', body: '' });
+  const handleOk = _id => {
+    console.log('prueba', _id);
+    dispatch(updatePost({ ...formData, _id }));
+    setIsModalVisible(false);
+  };
+
+  // const handleOk = (_id) => {
+  //   console.log(_id)
+  //   dispatch(editPost({...formData, _id}));
+  //   handleClose(false);
   // };
 
-  // const handleCancel = () => {
-  //   setIsModalVisible(false);
+  // const onSubmit = async e => {
+  //   e.preventDefault();
+  //   await dispatch(createPost(formData));
+  //   e.target.title.value = '';
+  //   e.target.body.value = '';
   // };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   // const onChange = e => {
-  //   setFormData(prevState => ({
-  //     ...prevState,
-  //     [e.target.name]: e.target.value,
-  //   }));
+  //   console.log('cambio');
+  //   // setFormData(prevState => ({
+  //   //   ...prevState,
+  //   //   [e.target.name]: e.target.value,
+  //   // }));
   // };
+  const onChange = e => {
+    setFormData(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
+  // console.log('prueba userPost modal', post?._id);
   const userPost = user.postId?.map(userPost => {
-    console.log('Esto es en Post', userPost);
+    // console.log(userPost);
+    // console.log('Esto es en Post', userPost);
     return (
       <div key={userPost._id}>
-        <span>{userPost.title}</span>
+        <span>{userPost?.title}</span>
         <span>
           <button onClick={() => deletePostNew(userPost._id)}>Eliminar</button>
         </span>
-        {/* <span>
-          <button onClick={() => showModal(userPost._id)}>Edita</button>
-          <Modal
-            title='Basic Modal'
-            visible={isModalVisible}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
-            <label>Edit Post Title</label>
-
-            <input
-              type='text'
-              placeholder='Edit Post Title'
-              value={title}
-              name='title'
-              onChange={onChange}
-            />
-            <br />
-            <label>Edit Post Body</label>
-
-            <input
-              type='text'
-              placeholder='Edit Post Body'
-              value={body}
-              name='body'
-              onChange={onChange}
-            />
-            <br />
-          </Modal>
-        </span> */}
+        <span>
+          {/* {console.log('dentro render', userPost?._id)} */}
+          <button onClick={() => showModal(userPost?._id)}>Edita</button>
+        </span>
       </div>
     );
   });
@@ -138,11 +148,46 @@ const Profile = () => {
         <div className='profile-card-footer'>
           <div className='foot-card'>
             <span>{userPost}</span>
+            <Modal
+              title='Basic Modal'
+              visible={isModalVisible}
+              onOk={() => {
+                handleOk(post?._id);
+              }}
+              onCancel={handleCancel}
+            >
+              <form>
+                <label>Edit Post Title</label>
+
+                <input
+                  type='text'
+                  placeholder='Edit Post Title'
+                  value={title}
+                  name='title'
+                  onChange={onChange}
+                />
+                <br />
+                <label>Edit Post Body</label>
+
+                <input
+                  type='text'
+                  placeholder='Edit Post Body'
+                  value={body}
+                  name='body'
+                  onChange={onChange}
+                />
+                <br />
+              </form>
+            </Modal>
           </div>
         </div>
       </div>
     </div>
   );
 };
+{
+  /* <Button onClick={() =>{handleOk(post.post._id)} }>Update</Button> */
+  // <Button onClick={handleClose}>Cancel</Button>
+}
 
 export default Profile;

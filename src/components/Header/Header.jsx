@@ -7,11 +7,22 @@ import { Link } from 'react-router-dom';
 import { notification } from 'antd';
 import { LogoutOutlined, HomeOutlined } from '@ant-design/icons';
 import './Header.scss';
+import { useState } from 'react';
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
+
+  const [text, setText] = useState('');
+
+  const handleChange = e => {
+    setText(e.target.value);
+    if (e.key === 'Enter') {
+      navigate('/search/' + text);
+    }
+  };
+
   const { pathname } = useLocation();
   if (pathname === '/' || pathname === '/login' || pathname === '/register')
     return null;
@@ -60,6 +71,13 @@ const Header = () => {
               <Link to='/' onClick={onLogout}>
                 <LogoutOutlined />
               </Link>
+            </span>
+            <span>
+              <input
+                onKeyUp={handleChange}
+                placeholder='search post'
+                name='text'
+              />
             </span>
           </>
         ) : (

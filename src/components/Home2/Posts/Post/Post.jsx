@@ -19,6 +19,7 @@ const Post = () => {
   const API_URL = 'http://localhost:4000/assets/posts/';
 
   const { title, body } = formData;
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -44,10 +45,11 @@ const Post = () => {
   };
 
   // console.log('hola soy nuevo', user);
-  const post = posts.map(post => {
+  const post = posts?.map(post => {
     // console.log('dentro del map', post);
     const isAlreadyLiked = post.likes?.includes(user?._id);
-    console.log('soy yo', post);
+    console.log('quiero ver si esta el avatar', post?.avatar);
+    console.log(API_URL + post?.avatar);
     return (
       <section key={post._id} className='wrapper'>
         <div className='main-card'>
