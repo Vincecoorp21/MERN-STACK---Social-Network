@@ -5,7 +5,11 @@ import { useSelector } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
 import { Link } from 'react-router-dom';
 import { notification } from 'antd';
-import { LogoutOutlined, HomeOutlined } from '@ant-design/icons';
+import {
+  LogoutOutlined,
+  HomeOutlined,
+  SearchOutlined,
+} from '@ant-design/icons';
 import './Header.scss';
 import { useState } from 'react';
 
@@ -13,13 +17,16 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
+  const PROFI_URL = 'http://localhost:4000/users/';
 
-  const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
 
   const handleChange = e => {
-    setText(e.target.value);
+    setTitle(e.target.value);
     if (e.key === 'Enter') {
-      navigate('/search/' + text);
+      console.log('aaaaaaaaaa', title);
+
+      navigate('/search/' + title);
     }
   };
 
@@ -35,32 +42,35 @@ const Header = () => {
       navigate('/');
     }, 2000);
   };
+  console.log('juaaaaas', user);
   return (
     <nav className='header-nav'>
-      <span>header</span>
-
-      <div>
+      <h2>bSocial!</h2>
+      <span className='input-container'>
+        <SearchOutlined className='search' />
+        {/* <img src='/assets/search.svg' alt='' class='search' /> */}
+        <input onKeyUp={handleChange} name='text' className='input-search2' />
+      </span>
+      <div className='div-icons'>
         <span>
           <Link to='/home2'>
-            <HomeOutlined />
+            <svg
+              aria-label='Inicio'
+              class='_8-yf5'
+              color='#262626'
+              fill='#262626'
+              height='24'
+              role='img'
+              viewBox='0 0 24 24'
+              width='24'
+            >
+              <path d='M22 23h-6.001a1 1 0 01-1-1v-5.455a2.997 2.997 0 10-5.993 0V22a1 1 0 01-1 1H2a1 1 0 01-1-1V11.543a1.002 1.002 0 01.31-.724l10-9.543a1.001 1.001 0 011.38 0l10 9.543a1.002 1.002 0 01.31.724V22a1 1 0 01-1 1z'></path>
+            </svg>
           </Link>
         </span>
         {user ? (
           <>
-            {/* {user.role === 'admin' ? ( */}
-            {/* <> */}
-            {/* <span>
-              <Link to='/admin'>Admin</Link>
-            </span> */}
-            <span>
-              <Link to='/profile'>{user.name}</Link>{' '}
-            </span>
-            {/* </> */}
-            {/* ) : ( '' )} */}
-            {/* <span>
-              <Link to='/profile'>{user.name}</Link>{' '}
-            </span> */}
-            {user.role === 'admin' ? (
+            {user.user?.role === 'admin' ? (
               <span>
                 <Link to='/admin'>Admin</Link>
               </span>
@@ -73,11 +83,13 @@ const Header = () => {
               </Link>
             </span>
             <span>
-              <input
-                onKeyUp={handleChange}
-                placeholder='search post'
-                name='text'
-              />
+              <Link to='/profile'>
+                <img
+                  src={PROFI_URL + user.user?.avatar}
+                  className='header-pic'
+                />
+                {/* src={PROFI_URL + post?.userId?.avatar} */}
+              </Link>{' '}
             </span>
           </>
         ) : (

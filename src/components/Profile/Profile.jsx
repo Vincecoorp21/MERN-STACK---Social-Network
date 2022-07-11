@@ -1,8 +1,11 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
+
 import { useEffect, useState } from 'react';
 import './Profile.scss';
 import { getUserInfo } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+// import { ImageBackground } from 'react-native';
 import {
   deletePost,
   getById,
@@ -12,6 +15,8 @@ import { Modal } from 'antd';
 
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
+  console.log('My frieddn', user?.user?.avatar);
+
   const { post, posts } = useSelector(state => state.posts);
   const dispatch = useDispatch();
 
@@ -21,6 +26,20 @@ const Profile = () => {
     title: '',
     body: '',
   });
+  // const APII =
+
+  // const PROFI_URL2 = (http://localhost:4000/users/ + '/user?.user?.avatar/');
+
+  const PROFI_URL = 'http://localhost:4000/users/';
+  const okmike = PROFI_URL + user?.user?.avatar;
+  console.log('soyMike', okmike);
+
+  // const picurl = PROFI_URL + user?.user?.avatar;
+
+  // console.log('Te estoy llamando', picurl);
+
+  // const res = await axios.delete(API_URL + '/posts/id/' + _id, {
+  // (API_URL + '/posts/id/' + _id, {
 
   // console.log('Componente Profile', user);
 
@@ -101,9 +120,10 @@ const Profile = () => {
   };
 
   // console.log('prueba userPost modal', post?._id);
-  const userPost = user.postId?.map(userPost => {
+  const userPost = user.user.postId?.map(userPost => {
     // console.log(userPost);
     // console.log('Esto es en Post', userPost);
+
     return (
       <div key={userPost._id}>
         <span>{userPost?.title}</span>
@@ -117,26 +137,31 @@ const Profile = () => {
       </div>
     );
   });
-
   return (
     <div className='profi-container'>
       <div className='profile-card'>
         <div className='profile-card-header'>
-          <div className='profile-image'></div>
+          <div className='profile-image'>
+            {/* <img
+              src={PROFI_URL + user?.user?.avatar}
+              alt=''
+              className='profile-image'
+            /> */}
+          </div>
           <div className='profile-info'>
-            <h3 className='profile-name'>{user?.name}</h3>
-            <p className='profile-desc'>{user?.email}</p>
-            <p className='profile-desc'>{user?.role}</p>
+            <h3 className='profile-name'>{user.user?.name}</h3>
+            <p className='profile-desc'>{user.user?.email}</p>
+            <p className='profile-desc'>{user.user?.role}</p>
           </div>
         </div>
         <div className='profile-card-body'>
           <section className='parte-final'>
             <div className='lista1'>
-              <h3>{user?.followers?.length}K</h3>
+              <h3>{user.user?.followers?.length}K</h3>
               <h4>Followers</h4>
             </div>
             <div className='lista2'>
-              <h3>{user?.following?.length}K</h3>
+              <h3>{user.user?.following?.length}K</h3>
               <h4>Following</h4>
             </div>
             <div className='lista3'>

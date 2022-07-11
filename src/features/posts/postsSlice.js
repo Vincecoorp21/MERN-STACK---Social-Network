@@ -74,9 +74,10 @@ export const updatePost = createAsyncThunk(
 
 export const getPostByName = createAsyncThunk(
   'posts/getPostByName',
-  async postName => {
+  async title => {
     try {
-      return await postsService.getPostByName(postName);
+      console.log('comprobando Slice 2', title);
+      return await postsService.getPostByName(title);
     } catch (error) {
       console.error(error);
     }

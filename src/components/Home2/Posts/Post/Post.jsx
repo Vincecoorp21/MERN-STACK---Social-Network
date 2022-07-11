@@ -8,7 +8,7 @@ import {
 } from '../../../../features/posts/postsSlice';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import './Post.scss';
-import logo from '../../../../assets/login-pic-wallpaper.jpg';
+// import logo from '../../../../assets/login-pic-wallpaper.jpg';
 
 const Post = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +16,9 @@ const Post = () => {
     body: '',
   });
 
-  const API_URL = 'http://localhost:4000/assets/posts/';
+  const API_URL = 'http://localhost:4000/posts/';
+
+  const PROFI_URL = 'http://localhost:4000/users/';
 
   const { title, body } = formData;
 
@@ -28,7 +30,13 @@ const Post = () => {
 
   const { user } = useSelector(state => state.auth);
 
-  console.log('home user state', user);
+  // const bienvenido = user?.name;
+
+  console.log('home user state', user?.user?.name);
+
+  const nombre = user?.user?.name;
+
+  console.log('Nombreeeee', nombre);
 
   const onChange = e => {
     setFormData(prevState => ({
@@ -46,10 +54,12 @@ const Post = () => {
 
   // console.log('hola soy nuevo', user);
   const post = posts?.map(post => {
-    // console.log('dentro del map', post);
-    const isAlreadyLiked = post.likes?.includes(user?._id);
-    console.log('quiero ver si esta el avatar', post?.avatar);
-    console.log(API_URL + post?.avatar);
+    console.log('dentro del map', user?.name);
+    const isAlreadyLiked = post.likes?.includes(user.user?._id);
+    // console.log('quiero ver si esta el avatar', post?.avatar);
+    // console.log(API_URL + post?.avatar);
+    console.log('aaaaaaafffrrrrr', post);
+    console.log('Buscando a Carlos', post?.userId?.avatar);
     return (
       <section key={post._id} className='wrapper'>
         <div className='main-card'>
@@ -57,7 +67,11 @@ const Post = () => {
             <div className='card-header'>
               <div className='card-header-left'>
                 <Link to={'/profile'}>
-                  <img src={logo} alt='' className='picture-title' />
+                  <img
+                    src={PROFI_URL + post?.userId?.avatar}
+                    alt=''
+                    className='picture-title'
+                  />
                 </Link>
                 <span className='card-title user'>{post.userId?.name}</span>
               </div>
@@ -67,7 +81,11 @@ const Post = () => {
                 </span>
               </div>
             </div>
-            <img src={logo} alt='Berlin width friends' class='main-picture' />
+            <img
+              src={API_URL + post?.avatar}
+              alt='Berlin width friends'
+              class='main-picture'
+            />
             <div className='bottom-container'>
               <div className='icon-container'>
                 <div className='bottom-icon-right'>
@@ -151,11 +169,38 @@ const Post = () => {
   });
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <input type='text' name='title' value={title} onChange={onChange} />
-        <input type='text' name='body' value={body} onChange={onChange} />
-        <button type='submit'>Publicar</button>
-      </form>
+      <div class='top-container panel'>
+        <div className='left-top-panel'>
+          <div class='little-card'>
+            <a href='https://www.instagram.com/avengers/' target='_blank'>
+              <img src='/assets/logo_insta_avengers.jpeg' alt='' />
+            </a>
+            <span class='top-title'>{nombre}</span>
+          </div>
+        </div>
+        <div className='right-top-panel'>
+          <div>
+            <form onSubmit={onSubmit} className='little-card-again'>
+              <input
+                type='text'
+                name='title'
+                value={title}
+                onChange={onChange}
+                placeholder='Post Title'
+              />
+              <input
+                type='text'
+                name='body'
+                value={body}
+                onChange={onChange}
+                placeholder='Body Title'
+              />
+              <button type='submit'>New Post</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {/* <p>{nombre}</p> */}
       <div>{post}</div>
     </>
   );

@@ -84,7 +84,7 @@ export const authSlice = createSlice({
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         // console.log('action', action.payload);
-        state.user = action.payload; //poner
+        state.user = { user: action.payload, token: action.payload.tokens[0] }; //poner
       });
   },
 });

@@ -25,7 +25,7 @@ function App() {
           <Route path='/home2' element={<Home2 />} />
           <Route path='/post/:_id' element={<PostDetail />} />
           <Route path='/admin' element={<Admin />} />
-          <Route path='/search/:postName' element={<Search />} />
+          <Route path='/search/:title' element={<Search />} />
         </Routes>
       </BrowserRouter>
     </div>
