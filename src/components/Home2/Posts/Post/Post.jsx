@@ -35,6 +35,7 @@ const Post = () => {
   // console.log('home user state', user?.user?.name);
 
   const nombre = user?.user?.name;
+  console.log('ajjajajajajajajjajaja', nombre);
 
   // console.log('Nombreeeee', nombre);
 

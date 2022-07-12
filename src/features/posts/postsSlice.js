@@ -119,7 +119,7 @@ export const postsSlice = createSlice({
       );
     });
     builder.addCase(createPost.fulfilled, (state, action) => {
-      state.posts = [...state.posts, action.payload];
+      state.posts = [action.payload, ...state.posts];
     });
     builder.addCase(like.fulfilled, (state, action) => {
       console.log('slice', action.payload);

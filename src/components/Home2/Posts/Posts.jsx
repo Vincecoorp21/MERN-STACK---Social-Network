@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getUserInfo } from '../../../features/auth/authSlice';
 import { getAllWith, reset } from '../../../features/posts/postsSlice';
 import Post from './Post/Post';
 
@@ -13,8 +14,14 @@ const Posts = () => {
   };
 
   useEffect(() => {
+    dispatch(getUserInfo());
     getPostsAndReset();
   }, []);
+
+  // useEffect(() => {
+  //   dispatch(getUserInfo());
+  //   getPostsAndReset();
+  // }, []);
 
   if (isLoading) {
     return <h1>Cargando posts...</h1>;
