@@ -41,11 +41,22 @@ const getUserInfo = async () => {
   console.log(res.data);
   return res.data;
 };
+const updatePic = async pic => {
+  console.log('pic2', pic);
+  const user = JSON.parse(localStorage.getItem('user'));
+  const res = await axios.put(API_URL + '/users/updatePic', pic, {
+    headers: {
+      authorization: user?.token,
+    },
+  });
+  return res.data;
+};
 
 const authService = {
   register,
   login,
   logout,
   getUserInfo,
+  updatePic,
 };
 export default authService;

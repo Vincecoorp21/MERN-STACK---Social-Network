@@ -49,6 +49,13 @@ export const getUserInfo = createAsyncThunk('auth/getUserInfo', async () => {
     console.error(error);
   }
 });
+export const updatePic = createAsyncThunk('users/updatePic', async pic => {
+  try {
+    return await authService.updatePic(pic);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -85,6 +92,9 @@ export const authSlice = createSlice({
       .addCase(getUserInfo.fulfilled, (state, action) => {
         // console.log('action', action.payload);
         state.user = { user: action.payload, token: action.payload.tokens[0] }; //poner
+      })
+      .addCase(updatePic.fulfilled, (state, action) => {
+        state.user = action.payload;
       });
   },
 });

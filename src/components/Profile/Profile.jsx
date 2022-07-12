@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { useEffect, useState } from 'react';
 import './Profile.scss';
-import { getUserInfo } from '../../features/auth/authSlice';
+import { getUserInfo, updatePic } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 // import { ImageBackground } from 'react-native';
 import {
@@ -15,7 +15,8 @@ import { Modal } from 'antd';
 
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
-  console.log('My frieddn', user?.user?.avatar);
+  console.log('jooolin', user);
+  // console.log('My frieddn', user?.user?.avatar);
 
   const { post, posts } = useSelector(state => state.posts);
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Profile = () => {
 
   const PROFI_URL = 'http://localhost:4000/users/';
   const okmike = PROFI_URL + user?.user?.avatar;
-  console.log('soyMike', okmike);
+  // console.log('soyMike', okmike);
 
   // const picurl = PROFI_URL + user?.user?.avatar;
 
@@ -83,7 +84,7 @@ const Profile = () => {
   };
 
   const handleOk = _id => {
-    console.log('prueba', _id);
+    // console.log('prueba', _id);
     dispatch(updatePost({ ...formData, _id }));
     setIsModalVisible(false);
   };
@@ -119,20 +120,42 @@ const Profile = () => {
     }));
   };
 
+  const onSubmit = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    console.log('pic', e.target.myFile?.files[0]);
+
+    if (e.target.myFile?.files[0]) {
+      formData.set('myFile', e.target.myFile?.files[0]);
+    }
+    await dispatch(updatePic(formData));
+    dispatch(getUserInfo());
+  };
+
   // console.log('prueba userPost modal', post?._id);
-  const userPost = user.user.postId?.map(userPost => {
-    // console.log(userPost);
+  const userPost = user?.user?.postId?.map(userPost => {
+    console.log('comprobandoooo', userPost);
     // console.log('Esto es en Post', userPost);
 
     return (
       <div key={userPost._id}>
         <span>{userPost?.title}</span>
         <span>
-          <button onClick={() => deletePostNew(userPost._id)}>Eliminar</button>
+          <button
+            className='btn-edit-delet'
+            onClick={() => deletePostNew(userPost._id)}
+          >
+            Delete
+          </button>
         </span>
         <span>
           {/* {console.log('dentro render', userPost?._id)} */}
-          <button onClick={() => showModal(userPost?._id)}>Edita</button>
+          <button
+            className='btn-edit-delet'
+            onClick={() => showModal(userPost?._id)}
+          >
+            Update
+          </button>
         </span>
       </div>
     );
@@ -141,13 +164,21 @@ const Profile = () => {
     <div className='profi-container'>
       <div className='profile-card'>
         <div className='profile-card-header'>
-          <div className='profile-image'>
-            {/* <img
+          <div className='profile-image2'>
+            <img
               src={PROFI_URL + user?.user?.avatar}
               alt=''
               className='profile-image'
-            /> */}
+            />
           </div>
+
+          <form onSubmit={onSubmit} className='form-user-prof2'>
+            <input type='file' name='myFile' />
+            <button type='submit'>Update Pic</button>
+          </form>
+
+          <br />
+          <br />
           <div className='profile-info'>
             <h3 className='profile-name'>{user.user?.name}</h3>
             <p className='profile-desc'>{user.user?.email}</p>
@@ -183,7 +214,6 @@ const Profile = () => {
             >
               <form>
                 <label>Edit Post Title</label>
-
                 <input
                   type='text'
                   placeholder='Edit Post Title'

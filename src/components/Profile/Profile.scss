@@ -149,3 +149,41 @@ h4 {
   gap: 20px;
   margin-top: 10px;
 }
+// .cont-form-prof {
+//   display: flex;
+//   flex-direction: column;
+// }
+.form-user-prof2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  button {
+    width: 50%;
+  }
+}
+
+.form-user-prof2 input {
+  background-color: rgba(70, 90, 126, 0.4);
+  opacity: 0.4;
+  border-radius: 10px;
+  outline: none;
+}
+.form-user-prof2 button {
+  width: 70%;
+  border-radius: 10px;
+  padding: 1px 2px;
+  border: 1px solid white;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.btn-edit-delet {
+  border-radius: 10px;
+  padding: 4px 8px;
+  border: 1px solid white;
+  cursor: pointer;
+  font-size: 10px;
+}

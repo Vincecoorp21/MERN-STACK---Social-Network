@@ -32,15 +32,15 @@ const Post = () => {
 
   // const bienvenido = user?.name;
 
-  console.log('home user state', user?.user?.name);
+  // console.log('home user state', user?.user?.name);
 
   const nombre = user?.user?.name;
 
-  console.log('Nombreeeee', nombre);
+  // console.log('Nombreeeee', nombre);
 
   const profile = PROFI_URL + user?.user?.avatar;
 
-  console.log('hellllllllllll', profile);
+  // console.log('hellllllllllll', profile);
 
   const onChange = e => {
     setFormData(prevState => ({
@@ -51,9 +51,15 @@ const Post = () => {
   //crear nuevo post
   const onSubmit = async e => {
     e.preventDefault();
+    const formData = new FormData();
+    console.log('mira Aquiiiiiii', e.target.imagePost.files);
+    if (e.target.imagePost.files[0])
+      formData.set('imagePost', e.target.imagePost.files[0]);
+    // e.target.title.value = '';
+    // e.target.body.value = '';
+    formData.set('title', e.target.title.value);
+    formData.set('body', e.target.body.value);
     await dispatch(createPost(formData));
-    e.target.title.value = '';
-    e.target.body.value = '';
   };
 
   // console.log('hola soy nuevo', user);
@@ -199,6 +205,7 @@ const Post = () => {
                 placeholder='Body Title'
                 className='input-field'
               />
+              <input type='file' name='imagePost' />
               <button type='submit'>New Post</button>
             </form>
           </div>
