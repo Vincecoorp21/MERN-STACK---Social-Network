@@ -38,6 +38,10 @@ const Post = () => {
 
   console.log('Nombreeeee', nombre);
 
+  const profile = PROFI_URL + user?.user?.avatar;
+
+  console.log('hellllllllllll', profile);
+
   const onChange = e => {
     setFormData(prevState => ({
       ...prevState,
@@ -172,9 +176,7 @@ const Post = () => {
       <div class='top-container panel'>
         <div className='left-top-panel'>
           <div class='little-card'>
-            <a href='https://www.instagram.com/avengers/' target='_blank'>
-              <img src='/assets/logo_insta_avengers.jpeg' alt='' />
-            </a>
+            <img src={profile} alt='' />
             <span class='top-title'>{nombre}</span>
           </div>
         </div>
@@ -187,6 +189,7 @@ const Post = () => {
                 value={title}
                 onChange={onChange}
                 placeholder='Post Title'
+                className='input-field'
               />
               <input
                 type='text'
@@ -194,6 +197,7 @@ const Post = () => {
                 value={body}
                 onChange={onChange}
                 placeholder='Body Title'
+                className='input-field'
               />
               <button type='submit'>New Post</button>
             </form>
