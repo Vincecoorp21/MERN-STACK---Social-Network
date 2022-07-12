@@ -46,11 +46,11 @@ const Header = () => {
   return (
     <nav className='header-nav'>
       <h2>bSocial!</h2>
-      <span className='input-container'>
-        <SearchOutlined className='search' />
+      <div className='input-container'>
         {/* <img src='/assets/search.svg' alt='' class='search' /> */}
+        <SearchOutlined className='search' />
         <input onKeyUp={handleChange} name='text' className='input-search2' />
-      </span>
+      </div>
       <div className='div-icons'>
         <span>
           <Link to='/home2'>

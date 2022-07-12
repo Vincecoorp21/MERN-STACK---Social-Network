@@ -212,7 +212,7 @@ const Profile = () => {
               }}
               onCancel={handleCancel}
             >
-              <form>
+              <form className='form-modal-profile'>
                 <label>Edit Post Title</label>
                 <input
                   type='text'
