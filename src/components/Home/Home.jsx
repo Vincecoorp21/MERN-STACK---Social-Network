@@ -6,9 +6,6 @@ const Home = () => {
     <div className='hero'>
       <div className='hero-content'>
         <h1 className='hero-title'>bSocial!</h1>
-        {/* <h2 className='hero-subtitle'>
-          I'm <span>VinceBC</span>....a Fullstack Web Developer
-        </h2> */}
         <Link to='/login'>
           <button type='button' className='hero-button'>
             Login
@@ -20,7 +17,6 @@ const Home = () => {
           </button>
         </Link>
       </div>
-      {/* <!-- <img src="/Foto yo 3.jpg" alt="Picture Vince BC " /> --> */}
     </div>
   );
 };

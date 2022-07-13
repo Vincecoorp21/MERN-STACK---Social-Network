@@ -18,11 +18,6 @@ const Posts = () => {
     getPostsAndReset();
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(getUserInfo());
-  //   getPostsAndReset();
-  // }, []);
-
   if (isLoading) {
     return <h1>Cargando posts...</h1>;
   }

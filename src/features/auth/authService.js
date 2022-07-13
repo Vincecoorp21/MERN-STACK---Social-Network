@@ -23,9 +23,8 @@ const logout = async () => {
       authorization: user?.token,
     },
   });
-  // console.log('primero', res.data);
+
   if (res.data) {
-    // console.log('segundo', res.data);
     localStorage.removeItem('user');
   }
   return res.data;
@@ -38,11 +37,10 @@ const getUserInfo = async () => {
       authorization: user?.token,
     },
   });
-  console.log(res.data);
+
   return res.data;
 };
 const updatePic = async pic => {
-  console.log('pic2', pic);
   const user = JSON.parse(localStorage.getItem('user'));
   const res = await axios.put(API_URL + '/users/updatePic', pic, {
     headers: {

@@ -14,7 +14,7 @@ const Register = () => {
   });
   const { name, email, password, password2 } = formData;
 
-  const dispatch = useDispatch(); //Inicializamos Dispatch
+  const dispatch = useDispatch(); 
 
   const { isSuccess, message, isError } = useSelector(state => state.auth);
 

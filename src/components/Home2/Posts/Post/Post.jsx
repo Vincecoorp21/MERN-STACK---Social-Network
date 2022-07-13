@@ -8,7 +8,6 @@ import {
 } from '../../../../features/posts/postsSlice';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import './Post.scss';
-// import logo from '../../../../assets/login-pic-wallpaper.jpg';
 
 const Post = () => {
   const [formData, setFormData] = useState({
@@ -30,18 +29,9 @@ const Post = () => {
 
   const { user } = useSelector(state => state.auth);
 
-  // const bienvenido = user?.name;
-
-  // console.log('home user state', user?.user?.name);
-
   const nombre = user?.user?.name;
-  console.log('ajjajajajajajajjajaja', nombre);
-
-  // console.log('Nombreeeee', nombre);
 
   const profile = PROFI_URL + user?.user?.avatar;
-
-  // console.log('hellllllllllll', profile);
 
   const onChange = e => {
     setFormData(prevState => ({
@@ -49,41 +39,31 @@ const Post = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  //crear nuevo post
+
   const onSubmit = async e => {
     e.preventDefault();
     const formData = new FormData();
-    console.log('mira Aquiiiiiii', e.target.imagePost.files);
     if (e.target.imagePost.files[0])
       formData.set('imagePost', e.target.imagePost.files[0]);
-    // e.target.title.value = '';
-    // e.target.body.value = '';
     formData.set('title', e.target.title.value);
     formData.set('body', e.target.body.value);
     await dispatch(createPost(formData));
   };
 
-  // console.log('hola soy nuevo', user);
   const post = posts?.map(post => {
-    console.log('dentro del map', user?.name);
     const isAlreadyLiked = post.likes?.includes(user.user?._id);
-    // console.log('quiero ver si esta el avatar', post?.avatar);
-    // console.log(API_URL + post?.avatar);
-    console.log('aaaaaaafffrrrrr', post);
-    console.log('Buscando a Carlos', post?.userId?.avatar);
     return (
       <section key={post._id} className='wrapper'>
         <div className='main-card'>
           <div className='card panel'>
             <div className='card-header'>
               <div className='card-header-left'>
-                <Link to={'/profile'}>
-                  <img
-                    src={PROFI_URL + post?.userId?.avatar}
-                    alt=''
-                    className='picture-title'
-                  />
-                </Link>
+                <img
+                  src={PROFI_URL + post?.userId?.avatar}
+                  alt=''
+                  className='picture-title'
+                />
+
                 <span className='card-title user'>{post.userId?.name}</span>
               </div>
               <div className='dropdown'>
@@ -183,7 +163,10 @@ const Post = () => {
       <div class='top-container panel'>
         <div className='left-top-panel'>
           <div class='little-card'>
-            <img src={profile} alt='' />
+            <Link to={'/profile'}>
+              <img src={profile} alt='' />
+            </Link>
+
             <span class='top-title'>{nombre}</span>
           </div>
         </div>
@@ -212,7 +195,7 @@ const Post = () => {
           </div>
         </div>
       </div>
-      {/* <p>{nombre}</p> */}
+
       <div>{post}</div>
     </>
   );

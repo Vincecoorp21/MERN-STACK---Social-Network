@@ -8,10 +8,8 @@ const PostDetail = () => {
   const { _id } = useParams();
   const dispatch = useDispatch();
   const { post } = useSelector(state => state.posts);
-  console.log('mira aquiiiii', post);
 
   const commentBody = post.commentId?.map(comment => {
-    console.log('perfectooo', comment);
     return <p key={comment._id}>{comment.body}</p>;
   });
 
@@ -19,19 +17,12 @@ const PostDetail = () => {
     dispatch(getById(_id));
   }, []);
 
-  //Intento de añadir la card
-
   const API_URL = 'http://localhost:4000/posts/';
 
   const PROFI_URL = 'http://localhost:4000/users/';
 
   return (
     <>
-      {/* <h1>Post detail</h1>
-      <h2>Title: {post.title}</h2>
-      <p>Body: {post.body}</p>
-      <p>Coments:{commentBody}</p>
-      <br /> */}
       <section className='wrapper'>
         <div className='main-card'>
           <div className='card panel'>
@@ -58,19 +49,6 @@ const PostDetail = () => {
             <div className='bottom-container'>
               <div className='icon-container'>
                 <div className='bottom-icon-right'>
-                  {/* {isAlreadyLiked ? (
-                    <HeartFilled
-                      className='heart'
-                      onClick={() => dispatch(dislike(post._id))}
-                      style={{ color: '#FF0000' }}
-                      text={post.likes?.length}
-                    />
-                  ) : (
-                    <HeartOutlined
-                      className='heart'
-                      onClick={() => dispatch(like(post._id))}
-                    />
-                  )} */}
                   <svg
                     aria-label='Compartir publicación'
                     className='send '

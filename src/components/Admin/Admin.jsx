@@ -7,11 +7,6 @@ const Admin = () => {
   const [load, setLoad] = useState(false);
   const { isLoading, posts } = useSelector(state => state.posts);
   const dispatch = useDispatch();
-  // const getPostsAndReset = async () => {
-  //   await dispatch(getAllWith());
-  //   dispatch(reset());
-  // };
-
   const loadSys = async () => {
     setLoad(false);
     dispatch(getAllWith());
@@ -22,9 +17,6 @@ const Admin = () => {
     loadSys();
   }, []);
 
-  // if (isLoading) {
-  //   return <h1>Cargando posts...</h1>;
-  // }
   return load ? (
     <div>
       <h1>Admin</h1>

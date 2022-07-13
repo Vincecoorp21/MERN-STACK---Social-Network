@@ -23,7 +23,6 @@ const Login = () => {
   const onSubmit = e => {
     e.preventDefault();
     dispatch(login(formData));
-    // console.log('formData', formData);
   };
 
   const dispatch = useDispatch();

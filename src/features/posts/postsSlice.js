@@ -76,7 +76,6 @@ export const getPostByName = createAsyncThunk(
   'posts/getPostByName',
   async title => {
     try {
-      console.log('comprobando Slice 2', title);
       return await postsService.getPostByName(title);
     } catch (error) {
       console.error(error);
@@ -122,7 +121,6 @@ export const postsSlice = createSlice({
       state.posts = [action.payload, ...state.posts];
     });
     builder.addCase(like.fulfilled, (state, action) => {
-      console.log('slice', action.payload);
       const posts = state.posts.map(post => {
         if (post._id === action.payload._id) {
           post = action.payload;
@@ -141,13 +139,11 @@ export const postsSlice = createSlice({
       state.posts = posts;
     });
     builder.addCase(updatePost.fulfilled, (state, action) => {
-      console.log('marcador editpOst', action.payload);
       const posts = state.posts.posts?.map(el => {
-        console.log('mira aquí 1', el);
         if (el._id === action.payload.post._id) {
           el = action.payload.post;
         }
-        console.log('mira aquí 2', el);
+
         return posts;
       });
       state.posts = posts;

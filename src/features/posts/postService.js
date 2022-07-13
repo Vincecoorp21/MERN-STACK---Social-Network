@@ -4,16 +4,15 @@ const API_URL = 'http://localhost:4000';
 
 const getAllWith = async () => {
   const res = await axios.get(API_URL + '/posts/getallwith');
-  console.log('soy el service', res.data);
+
   return res.data;
 };
 const getById = async id => {
   const res = await axios.get(API_URL + '/posts/id/' + id);
-  console.log('postBy ID', res.data);
+
   return res.data;
 };
 const deletePost = async _id => {
-  console.log('Holaaaaaaaaaa', _id);
   const user = JSON.parse(localStorage.getItem('user'));
   const res = await axios.delete(API_URL + '/posts/id/' + _id, {
     headers: {
@@ -60,9 +59,8 @@ const dislike = async _id => {
 };
 
 const updatePost = async post => {
-  console.log('post del service', post);
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log('comprobar token', user?.token);
+
   const res = await axios.put(API_URL + '/posts/id/' + post._id, post, {
     headers: {
       authorization: user?.token,
@@ -76,7 +74,6 @@ const getPostByName = async title => {
 };
 
 const deletePostAdmin = async _id => {
-  // console.log('Holaaaaaaaaaa', _id);
   const user = JSON.parse(localStorage.getItem('user'));
   const res = await axios.delete(API_URL + '/posts/delet/id/' + _id, {
     headers: {

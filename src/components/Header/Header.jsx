@@ -24,8 +24,6 @@ const Header = () => {
   const handleChange = e => {
     setTitle(e.target.value);
     if (e.key === 'Enter') {
-      console.log('aaaaaaaaaa', title);
-
       navigate('/search/' + title);
     }
   };
@@ -37,17 +35,15 @@ const Header = () => {
   const onLogout = () => {
     // e.preventDefault();
     dispatch(logout());
-    notification.success({ message: 'Te has desconectado con éxito' });
+    notification.success({ message: 'Logout successful' });
     setTimeout(() => {
       navigate('/');
     }, 2000);
   };
-  console.log('juaaaaas', user);
   return (
     <nav className='header-nav'>
       <h2>bSocial!</h2>
       <div className='input-container'>
-        {/* <img src='/assets/search.svg' alt='' class='search' /> */}
         <SearchOutlined className='search' />
         <input onKeyUp={handleChange} name='text' className='input-search2' />
       </div>
@@ -88,7 +84,6 @@ const Header = () => {
                   src={PROFI_URL + user.user?.avatar}
                   className='header-pic'
                 />
-                {/* src={PROFI_URL + post?.userId?.avatar} */}
               </Link>{' '}
             </span>
           </>
