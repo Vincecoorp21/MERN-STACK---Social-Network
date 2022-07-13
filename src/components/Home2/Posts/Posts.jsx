@@ -19,11 +19,11 @@ const Posts = () => {
   }, []);
 
   if (isLoading) {
-    return <h1>Cargando posts...</h1>;
+    return <h1>Loading feed....</h1>;
   }
   return (
     <div>
-      <h1>Posts</h1>
+      <h1 className='posts-title'>Feed</h1>
       <Post />
     </div>
   );

@@ -193,3 +193,12 @@ input[type='text']::placeholder {
   font-size: 12px;
   font-style: italic;
 }
+.posts-title {
+  font-family: 'Pacifico';
+  font-size: 1.4rem;
+  font-weight: bold;
+  opacity: 0.5;
+  text-shadow: 4px 4px 7px red;
+  letter-spacing: 0.4em;
+  font-style: italic;
+}

@@ -74,7 +74,7 @@ const Post = () => {
             </div>
             <img
               src={API_URL + post?.avatar}
-              alt='Berlin width friends'
+              alt='No picture'
               class='main-picture'
             />
             <div className='bottom-container'>
