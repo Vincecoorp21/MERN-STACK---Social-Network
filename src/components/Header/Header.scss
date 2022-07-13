@@ -54,7 +54,16 @@ h2 {
 }
 .div-icons {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
+}
+.logout-icon {
+  font-size: 20px;
+}
+.log-link {
+  color: black;
+  font-weight: bold;
+}
+.log-link:hover {
+  color: red;
 }

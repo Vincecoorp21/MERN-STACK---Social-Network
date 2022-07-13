@@ -78,8 +78,8 @@ const Header = () => {
               ''
             )}
             <span>
-              <Link to='/' onClick={onLogout}>
-                <LogoutOutlined />
+              <Link to='/' onClick={onLogout} className='log-link'>
+                <LogoutOutlined className='logout-icon' />
               </Link>
             </span>
             <span>

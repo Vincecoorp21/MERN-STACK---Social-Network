@@ -11,6 +11,7 @@ import 'antd/dist/antd.css';
 import PostDetail from './components/PostDetail/PostDetail';
 import Admin from './components/Admin/Admin';
 import Search from './components/Search/Search';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/admin' element={<Admin />} />
           <Route path='/search/:title' element={<Search />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
